@@ -1,62 +1,76 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_helloword/SecondPage.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Hello',
-      theme: ThemeData(primarySwatch: Colors.green),
-      home: Scaffold(
-        body: Center(
-          child: stateFull(text: "Hello Word!")
-        ),
-      ),
+      title: "Flutter Demo",
+      home: FirstPages(),
+      theme: ThemeData(primarySwatch: Colors.blue),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class Heading extends StatelessWidget {
-  //variable
-  final String text;
+class FirstPages extends StatefulWidget {
+  @override
+  _FirstPagesState createState() => _FirstPagesState();
+}
 
-  //constructor
-  Heading({Key key, this.text});
-
+class _FirstPagesState extends State<FirstPages> {
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: TextStyle(
-      fontSize: 24,
-      fontWeight: FontWeight.bold
-    ),);
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+              Icons.menu,
+              color: Colors.white),
+        ),
+        title: Text("First Page"),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.search,
+                  color: Colors.white)
+          )
+        ],
+      ),
+      body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("Hello Word!",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)
+                ),
+                RaisedButton(
+                  child: Text("Go To Second Page",
+                      style: TextStyle(fontSize: 18)
+                  ),
+                  color: Colors.blue,
+                  onPressed: () {
+                    setState(() {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SecondPages()));
+                    });
+                  },
+                )
+              ]
+          )
+      ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add)),
+    );
   }
 }
 
-class stateFull extends StatefulWidget {
-  final String text;
-
-  stateFull({this.text, Key key}) : super(key: key);
-
-  @override
-  _stateFullState createState() => _stateFullState();
-}
-
-class _stateFullState extends State<stateFull> {
-  double _size = 18.0;
-  @override
-  Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center,
-    children: <Widget>[
-        Text(widget.text, style: TextStyle(fontSize: _size)),
-      RaisedButton(child: Text("Up"),
-        onPressed: (){
-        setState(() {
-          _size = 24.0;
-        });
-        },)
-    ],);
-  }
-}
