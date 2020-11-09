@@ -19,7 +19,7 @@ class _SecondPagesState extends State<SecondPages> {
                   color: Colors.white),
               textAlign: TextAlign.center
             ),
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(10),
           color: Colors.blue,),
         ),
       ),
